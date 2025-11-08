@@ -1,6 +1,7 @@
 <p align="center">
   <img src="remedi_logo.png" alt="ReMedi Logo" width="120"/>
 </p>
+
 ---
 
 # 🩺 ReMedi — Never miss a dose again.
