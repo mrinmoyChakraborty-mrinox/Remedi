@@ -33,7 +33,7 @@
 
 | Layer | Technology |
 |--------|-------------|
-| **Frontend** | HTML, CSS, Bootstrap, Chart.js |
+| **Frontend** | HTML, CSS, JS |
 | **Backend** | Flask (Python) |
 | **Database** | Firebase Firestore |
 | **Authentication** | Firebase Auth |
@@ -48,7 +48,7 @@
 
 ```
 
-HealthEase/
+Remedi/
 │
 ├── app.py                    # Main Flask application
 ├── firebase_config.json       # Firebase credentials file
