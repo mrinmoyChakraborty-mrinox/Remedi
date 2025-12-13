@@ -456,3 +456,39 @@ footer {
     border-radius: 50%;
     backdrop-filter: blur(3px);
 }
+
+/* Popup Styles */
+
+.popup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+  }
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 200px;
+    text-align: center;
+    animation: pop 0.3s ease;
+  }
+/* Buttons inside the popup */
+.popup-content button {
+    margin: 10px 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+#confirmLogout {
+    background-color: #d9534f; /* Red for logout */
+    color: white;
+    border: none;
+}
+@keyframes pop {
+  from { transform: scale(0.6); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}

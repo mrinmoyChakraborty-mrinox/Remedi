@@ -18,8 +18,8 @@
           <li><a href="/about">About Us</a></li>
           {% if 'user' in session %}
           <li><a href="/dashboard">Dashboard</a></li>
-          <li><a href="#">Hydration</a></li>
-          <li><a href="/logout">Log out</a></li>
+          <li><a id="logout-btn" class="popupBtn" href="#">Log out</a></li>
+          
           <li><a href="/profile"><div class="hello-right">
         <div class="hello-profile" style="background-image: url('{{user.photo_url}}'); background-size: cover; background-position: right;"></div>
     </div></a></li>
@@ -29,8 +29,16 @@
         </ul>
       </nav>
     </div>
+  <div id="logout-popup" class="popup">
+    <div class="popup-content">
+      <p>Log out of your account?</p>
+      <button id="confirmLogout">Yes, Log Out</button>
+      <button id="closeBtn">Close</button>
+    </div>
+  </div>
   </header>
     {% block content %}
     {% endblock %}
+  <script src="{{ url_for('static', filename='js/base.js') }}"></script>
   </body>
 </html>
