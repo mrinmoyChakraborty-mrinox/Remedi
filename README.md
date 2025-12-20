@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="static/images/remedi_logo.png" alt="ReMedi Logo" width="120"/>
+  <img src="static/images/titleicon.png" alt="ReMedi Logo" width="120"/>
 </p>
 
 ---
@@ -126,6 +126,7 @@ Remedi/
    ```
    http://127.0.0.1:5000/
    ```
+   or use directly from - https://remedi-final-rx.vercel.app/
 
 ---
 
