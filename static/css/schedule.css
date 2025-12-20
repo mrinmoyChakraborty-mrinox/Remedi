@@ -1,0 +1,88 @@
+/* ===============================
+   SCHEDULE PAGE ONLY
+   =============================== */
+
+.schedule-page .schedule-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.schedule-page .page-title {
+  color: #1e3a5f;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.schedule-page .section-title {
+  color: #1e3a5f;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 20px 0 15px;
+}
+
+/* ---------- Pill Pack ---------- */
+.schedule-page .pill-pack-section {
+  margin-bottom: 40px;
+}
+
+.schedule-page .pill-pack-options {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.schedule-page .pill-pack-options .option {
+  padding: 12px 18px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.schedule-page .pill-pack-options .option.selected {
+  background: #4c8bfd;
+  color: white;
+  border-color: #4c8bfd;
+}
+
+/* ---------- Weekly Schedule ---------- */
+.schedule-page .weekly-schedule-section {
+  background: #2c3e50;
+  padding: 25px;
+  border-radius: 12px;
+  color: white;
+}
+
+/* ---------- Timing Block ---------- */
+.schedule-page .timing {
+  background: #e8e8e8;
+  padding: 25px;
+  border-radius: 10px;
+  margin-top: 30px;
+}
+
+/* ---------- Bottom Nav ---------- */
+.schedule-page .bottom-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2.5rem;
+}
+
+.schedule-page .btn-nav {
+  padding: 0.875rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+
+.schedule-page .btn-primary {
+  background: #4c8bfd;
+  color: white;
+}
+
+.schedule-page .btn-secondary {
+  background: transparent;
+  color: #4c8bfd;
+  border: 2px solid #4c8bfd;
+}

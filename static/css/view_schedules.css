@@ -1,0 +1,88 @@
+/* =========================
+   Page Layout
+========================= */
+.schedules-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 16px;
+    font-family: Arial, sans-serif;
+}
+
+.schedules-container h1 {
+    text-align: center;
+    margin-bottom: 24px;
+    color: #333;
+}
+
+/* =========================
+   Schedule Card
+========================= */
+.schedule-card {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    padding: 12px;
+    background-color: #fff;
+}
+
+/* =========================
+   Header (Name + Dropdown)
+========================= */
+.schedule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.schedule-header strong {
+    font-size: 16px;
+    color: #222;
+}
+
+.schedule-header button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* =========================
+   Details Section
+========================= */
+.schedule-details {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.schedule-details p {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #444;
+}
+
+/* =========================
+   Delete Button
+========================= */
+.schedule-details button {
+    margin-top: 10px;
+    padding: 6px 12px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.schedule-details button:hover {
+    background-color: #c0392b;
+}
+
+/* =========================
+   Empty / Error Text
+========================= */
+#schedulesList p {
+    text-align: center;
+    color: #666;
+}

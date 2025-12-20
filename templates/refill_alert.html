@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Refill Alert</title>
+  <link rel="stylesheet" href="/static/css/refill_alert.css">
+</head>
+<body>
+
+  <div class="overlay">
+    <div class="refill-card">
+
+      <!-- Heading (always visible) -->
+      <h2 class="alert-title">Refill Alert !!</h2>
+
+      <!-- Medicine status line (backend will replace this text) -->
+      <p class="alert-text" id="medicineStatus">
+        Loading...
+      </p>
+
+      <!-- Total remaining (label always visible, value from backend) -->
+      <p class="remaining-text">
+        Total Remaining:
+        <span id="remainingValue">Loading...</span>
+      </p>
+
+      <!-- Buttons (always visible) -->
+      <div class="button-group">
+        <button class="btn refill-btn">Refill</button>
+        <button class="btn skip-btn">Skip Refill / Course is done</button>
+      </div>
+
+    </div>
+  </div>
+<script src="/static/js/refill_alert.js" defer></script>
+
+</body>
+</html>

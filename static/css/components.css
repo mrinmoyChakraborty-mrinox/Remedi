@@ -1,0 +1,113 @@
+/* ===============================
+   SHARED COMPONENT STYLES
+   Used by add_medicine + schedule
+   =============================== */
+
+/* ---------- Days of week selector ---------- */
+.days-of-week {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin: 12px 0;
+}
+
+.days-of-week .day {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #cfd8e3;
+  background: #ffffff;
+  color: #1f2d3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.days-of-week .day:hover {
+  background: #f0f6ff;
+  border-color: #4c8bfd;
+}
+
+.days-of-week .day.selected,
+.days-of-week .day[aria-pressed="true"] {
+  background: #4c8bfd;
+  color: #ffffff;
+  border-color: #4c8bfd;
+  box-shadow: 0 4px 10px rgba(76, 139, 253, 0.25);
+}
+
+/* Keyboard focus */
+.days-of-week .day:focus {
+  outline: 3px solid rgba(76, 139, 253, 0.3);
+  outline-offset: 2px;
+}
+
+/* ---------- Generic error message ---------- */
+.error-message {
+  color: #dc2626;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 6px;
+}
+
+/* ---------- Timing info card (REUSED) ---------- */
+.timing-info-card {
+  background: #e9f7ef;
+  border: 1px solid rgba(11, 95, 59, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.timing-info-header {
+  margin-bottom: 12px;
+}
+
+.timing-heading {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #0b5f3b;
+  font-weight: 700;
+}
+
+.timing-note {
+  margin: 6px 0 0;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.timing-controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.timing-control-item {
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  flex: 1;
+}
+
+.timing-control-item label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #1f3b2f;
+}
+
+.timing-control-item input,
+.timing-control-item select {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #cfd8d4;
+}
+
+.timing-control-item input:focus,
+.timing-control-item select:focus {
+  outline: none;
+  border-color: #0b5f3b;
+  box-shadow: 0 0 0 3px rgba(11, 95, 59, 0.15);
+}

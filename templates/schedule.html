@@ -2,9 +2,9 @@
 {% block title %}Schedule Reminders{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{{ url_for('static', filename='schedule.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='reminder.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='timing.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/schedule.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reminder.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/timing.css') }}">
 
 <div class="schedule-container">
   <h1 class="page-title">Schedule for - Medicine</h1>
@@ -143,10 +143,8 @@
   </div>
 </div>
 
-<script src="{{ url_for('static', filename='schedule.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/schedule_copy.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/timing.js') }}" defer></script>
+
 {% endblock %}
 
-{% block scripts %}
-<script src="{{ url_for('static', filename='reminder.js') }}" defer></script>
-<script src="{{ url_for('static', filename='timing.js') }}" defer></script>
-{% endblock %}

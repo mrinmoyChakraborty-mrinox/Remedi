@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test OCR API</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4b5563;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        input[type="url"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box; /* Important for padding */
+            transition: border-color 0.2s;
+        }
+
+        input[type="url"]:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        button {
+            width: 100%;
+            background-color: #2563eb;
+            color: white;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        button:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        #status {
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            min-height: 1.5rem;
+        }
+
+        .status-loading { color: #2563eb; }
+        .status-error { color: #dc2626; }
+        .status-success { color: #059669; }
+
+        .helper-text {
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            color: #6b7280;
+            background: #f9fafb;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: left;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>💊 Test Prescription OCR</h1>
+        
+        <div class="input-group">
+            <label for="imageUrl">Enter Image URL</label>
+            <input 
+                type="url" 
+                id="imageUrl" 
+                placeholder="https://ik.imagekit.io/..." 
+                value="https://ik.imagekit.io/RemediRX/pres1?updatedAt=1764441758082"
+            >
+        </div>
+
+        <button id="scanBtn" onclick="testOCR()">Scan Prescription</button>
+
+        <div id="status"></div>
+
+        <div class="helper-text">
+            <strong>Endpoint:</strong> /api/fill_from_prescription<br>
+            <strong>Default URL:</strong> Your sample prescription image.
+        </div>
+    </div>
+
+    <script>
+        async function testOCR() {
+            const urlInput = document.getElementById('imageUrl');
+            const btn = document.getElementById('scanBtn');
+            const statusDiv = document.getElementById('status');
+            const imageUrl = urlInput.value.trim();
+
+            if (!imageUrl) {
+                statusDiv.innerText = "Please enter a valid URL";
+                statusDiv.className = "status-error";
+                return;
+            }
+
+            // UI State: Loading
+            btn.disabled = true;
+            btn.innerText = "Analyzing with Gemini AI...";
+            statusDiv.innerText = "⏳ Processing image... (approx 3-5 seconds)";
+            statusDiv.className = "status-loading";
+
+            try {
+                const response = await fetch('/api/fill_from_prescription', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ image_url: imageUrl })
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    // UI State: Success
+                    statusDiv.innerText = "✅ Success! Redirecting...";
+                    statusDiv.className = "status-success";
+                    
+                    // Wait 1 second so user sees the success message, then redirect
+                    setTimeout(() => {
+                        window.location.href = result.redirect_url;
+                    }, 1000);
+                } else {
+                    // UI State: API Error
+                    throw new Error(result.error || "Unknown server error");
+                }
+
+            } catch (error) {
+                // UI State: Network/System Error
+                console.error(error);
+                statusDiv.innerText = "❌ Error: " + error.message;
+                statusDiv.className = "status-error";
+                btn.disabled = false;
+                btn.innerText = "Scan Prescription";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Upload Prescription{% endblock %}
+{% block content %}
+    <link rel="stylesheet" href="/static/css/upload_prescription.css">
+    <div class="page-container">
+
+        <div class="card">
+            <div class="blue-header">
+    <div class="avatar"></div>
+    <h2 class="greeting">Upload Prescription</h2>
+            </div>
+
+    <!-- Browse files option -->
+    <button class="browse-btn" onclick="openFilePicker()">Browse files</button>
+
+    <p class="supported">*Supported files: jpg, jpeg, png, pdf
+                         * the picture should be clear
+    </p>
+  
+    <!-- Existing upload input (image + pdf) -->
+    <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.pdf" hidden>
+
+    <p id="fileName" class="file-name"></p>
+    </div>
+    
+        <button class="confirm-btn" onclick="confirmUpload()">Confirm</button>
+
+    </div>
+
+    <script src="/static/js/upload_prescription.js"></script>
+{% endblock %}

@@ -1,0 +1,7 @@
+ body { font-family: sans-serif; text-align: center; padding: 50px 20px; background-color: #f4f7f6; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 400px; margin: auto; }
+        h1 { color: #333; }
+        .med-name { color: #007bff; font-size: 2em; margin: 10px 0; font-weight: bold; }
+        .btn { display: block; width: 100%; padding: 15px; margin-top: 20px; font-size: 1.2em; border: none; border-radius: 10px; cursor: pointer; }
+        .btn-take { background-color: #28a745; color: white; }
+        .btn-skip { background-color: #dc3545; color: white; margin-top: 10px; }

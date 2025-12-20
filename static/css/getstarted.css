@@ -83,7 +83,7 @@
   border-radius: 8px;
   padding: 10px;
   color: var(--text);
-  font-size: 14px;
+  font-size: 14px; 
   transition: border-color 0.2s;
 }
 
@@ -162,3 +162,44 @@
 .getstartedbody #phone-login-btn:hover {
   background: #0ea5e9;
 }
+
+.back-btn {
+  margin-bottom: 10px;
+}
+.or-text {
+  text-align: center;
+  color: #007acc;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+#google-login-btn,
+#phone-login-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 12px;
+  display: block;
+}
+
+#google-login-btn {
+  margin-top: 15px;
+}
+
+#phone-login-btn {
+  margin-top: 10px;
+}
+
+.error {
+  color: #e11d48;
+  font-size: 12px;
+  margin-top: -6px;
+  display: none;
+  transition: opacity 0.2s ease;
+}
+
+input.invalid {
+  border-color: #e11d48 !important;
+  box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.15);
+}
+

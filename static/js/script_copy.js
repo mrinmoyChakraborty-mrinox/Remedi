@@ -1,21 +1,3 @@
-const btnSignIn = document.getElementById("btn-signin");
-const btnSignUp = document.getElementById("btn-signup");
-const signInForm = document.getElementById("signin-form");
-const signUpForm = document.getElementById("signup-form");
-
-btnSignIn.addEventListener("click", () => {
-  btnSignIn.classList.add("active");
-  btnSignUp.classList.remove("active");
-  signInForm.style.display = "flex";
-  signUpForm.style.display = "none";
-});
-
-btnSignUp.addEventListener("click", () => {
-  btnSignUp.classList.add("active");
-  btnSignIn.classList.remove("active");
-  signUpForm.style.display = "flex";
-  signInForm.style.display = "none";
-});
 const signinForm = document.getElementById("signin-form");
 const signupForm = document.getElementById("signup-form");
 const phoneForm = document.getElementById("phone-form");
@@ -114,4 +96,3 @@ function validatePhoneValue(phone) {
   const regex = /^(\+91)?[6-9]\d{9}$/;
   return regex.test(phone);
 }
-

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}My Schedules{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/view_schedules.css') }}">
+
+<div class="schedules-container">
+    <h1>📋 My Medicine Schedules</h1>
+
+    <div id="schedulesList">
+        <p>Loading schedules...</p>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/view_schedules.js') }}"></script>
+{% endblock %}

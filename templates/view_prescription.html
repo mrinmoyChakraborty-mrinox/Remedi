@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}View Prescriptions{% endblock %}
+{% block content %}
+
+    <title>View Prescriptions</title>
+    <link rel="stylesheet" href="/static/css/view_prescription.css">
+
+<div class="container">
+
+    <h2 class="title">View Prescriptions</h2>
+
+    <!-- This container will be populated by JavaScript -->
+    <div id="prescriptionsList">
+        <p>Loading prescriptions...</p>
+    </div>
+    
+    
+
+<script src="/static/js/view_prescription.js"></script>
+{% endblock %}

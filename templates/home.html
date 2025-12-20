@@ -8,8 +8,10 @@
       <h2>Stay on Track with <span>ReMedi</span></h2>
       <p>Organize your medicine schedule,inventory, track hydration, and receive reminders — all in one smart, simple web app built for your health.</p>
       <div class="hero-buttons">
+        {% if 'user' not in session %}
         <a href="/getstarted" class="btn">Get Started</a>
-        <a href="#" class="btn-outline">Learn More</a>
+        {% endif %}
+        <a href="" class="btn-outline">Learn More</a>
       </div>
     </div>
     <div class="hero-image">
@@ -45,11 +47,19 @@
   </section>
 
   <!-- Call to Action -->
+  {% if 'user' not in session %} 
   <section class="cta">
     <h2>Start your health journey today 🌿</h2>
     <p>Join thousands of users managing their health with ReMedi.</p>
     <a href="/getstarted" class="btn big">Sign Up Free</a>
   </section>
+  {% else %}
+  <section class="cta">
+  <h2>Welcome back 🌿</h2>
+  <p>Small, consistent steps lead to better health. Let’s continue.</p>
+  <a href="/dashboard" class="btn big">Continue to Dashboard</a>
+  </section>
+  {% endif %}
 
   <!-- Footer -->
   <footer>

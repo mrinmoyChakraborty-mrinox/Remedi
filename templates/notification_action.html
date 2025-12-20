@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Reminder</title>
+    <link rel="stylesheet" href="/static/css/notification_action.css">
+    <script src="/static/js/notification_action.js" defer></script>
+</head>
+<body>
+
+    <div class="card">
+        <h1>It's Time!</h1>
+        <p>Please take your medicine:</p>
+        
+        <!-- ID used for JS to inject text -->
+        <div class="med-name" id="medNameDisplay">Loading...</div>
+        
+        <!-- IDs used for JS to attach click listeners -->
+        <button id="btn-take" class="btn btn-take">✅ I Took It</button>
+        <button id="btn-skip" class="btn btn-skip">Skip / Go to Dashboard</button>
+    </div>
+
+</body>
+</html>

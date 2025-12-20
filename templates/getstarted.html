@@ -16,8 +16,10 @@
     <form id="signin-form">
       <label for="signin-email">Email</label>
       <input id="signin-email" type="email" placeholder="example@gmail.com" required />
+      <small class="error"></small>
       <label for="signin-password">Password</label>
       <input id="signin-password" type="password" placeholder="••••••••" required />
+      <small class="error"></small>
       <button class="btn" type="submit">Sign In</button>
     </form>
 
@@ -25,20 +27,71 @@
     <form id="signup-form" style="display: none;">
       <label for="signup-email">Email</label>
       <input id="signup-email" type="email" placeholder="you@mail.com" required />
+      <small class="error"></small>
       <label for="signup-password">Password</label>
       <input id="signup-password" type="password" placeholder="Choose a password" required />
+      <small class="error"></small>
       <button class="btn" type="submit">Sign Up</button>
     </form>
+<form id="phone-form" style="display:none; flex-direction:column; gap:12px;">
+
+  <!-- ✅ BACK BUTTON ON TOP -->
+  <button type="button" id="back-btn" class="btn-outline" style="align-self:flex-start;">
+    ← Back
+  </button>
+
+  <!-- <h2 style="text-align:center; color:#0b3558;">Get Started — Remedi</h2> -->
+
+  <label for="phone">Phone Number</label>
+  <input id="phone" type="tel" placeholder="+91XXXXXXXXXX" required>
+  <small class="error"></small>
+
+  <button type="button" class="btn" id="send-otp-btn">
+    Send OTP
+  </button>
+
+  <!-- OTP BOX -->
+  <div id="otp-box" style="display:none; flex-direction:column; gap:10px;">
+    <label for="otp">Enter OTP</label>
+    <input id="otp" type="text" placeholder="123456">
+    <small class="error"></small>
+    <button type="button" class="btn" id="verify-otp-btn">
+      Verify OTP
+    </button>
+  </div>
+
+  <!-- ✅ SINGLE OR -->
+  <div style="text-align:center; margin:10px 0; color:#007acc; font-weight:600;">
+    OR
+  </div>
+
+  <!-- OTHER LOGIN OPTIONS -->
+  <button type="button" class="btn" id="phone-google-btn">
+    Continue with Google
+  </button>
+
+  <button type="button" class="btn-outline" id="phone-email-btn">
+    Continue with Email
+  </button>
+
+</form>
+
     <br>
-    <h3 style="display:flex; align-items: center ; color:#007acc; justify-content: center;">OR</h3>
+    <!-- <h3 style="display:flex; align-items: center ; color:#007acc; justify-content: center;">OR</h3> -->
     <br>
     
     <button id="google-login-btn" >Continue with Google</button>
-    <br>
+    <!--<br>
     <button id="phone-login-btn" >Continue with phone no.</button>
+-->
+    <!-- <button type="button" id="back-btn" class="btn-outline">
+  ← Back
+</button> -->
 
   </div>
 </div>
   <script type="module" src="{{url_for('static',filename='js/auth.js')}}"></script>
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+
 {% endblock %}

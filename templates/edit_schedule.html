@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}Edit Schedule{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/css/add_medicine.css">
+<link rel="stylesheet" href="/static/css/components.css">
+
+<div class="add-med-container">
+
+  <div class="page-head">
+    <h1 class="page-title page-title--cobalt">EDIT SCHEDULE</h1>
+  </div>
+
+  <div class="medicine-card">
+    <div class="card-body">
+
+      <input type="hidden" id="scheduleId" value="{{ schedule_id }}">
+
+      <!-- Quantity per dose -->
+      <label>Quantity of Intake per Dose</label>
+      <input type="number" id="quantity_per_dose" min="1">
+
+      <!-- Food preference -->
+      <label class="when-taken-label">When should this be taken?</label>
+      <div class="meal-group">
+        <div class="meal-option">
+          <input type="radio" name="food" value="Before Food" id="food-before">
+          <label for="food-before" class="meal-card">Before Meal</label>
+        </div>
+        <div class="meal-option">
+          <input type="radio" name="food" value="After Food" id="food-after">
+          <label for="food-after" class="meal-card">After Meal</label>
+        </div>
+        <div class="meal-option">
+          <input type="radio" name="food" value="No preference" id="food-any">
+          <label for="food-any" class="meal-card">Any Time</label>
+        </div>
+      </div>
+
+      <!-- Time of day -->
+      <label class="time-of-day-label">Time of Day (select all that apply)</label>
+      <div class="tod-pics">
+
+        {% for label, default in {
+          "Morning":"08:00",
+          "Afternoon":"13:00",
+          "Evening":"18:00",
+          "Night":"22:00"
+        }.items() %}
+        <label class="tod-item">
+          <input type="checkbox" value="{{ label }}">
+          <div class="tod-label">{{ label }}</div>
+          <span class="time-input-container">
+            <input type="time" value="{{ default }}">
+          </span>
+        </label>
+        {% endfor %}
+
+      </div>
+
+      <!-- Fallback single time -->
+      <label>Time (IST)</label>
+      <input type="time" id="single_time">
+
+      <!-- Start date -->
+      <label>Start Date</label>
+      <input type="date" id="start_date">
+
+      <!-- Duration -->
+      <label>Duration (days)</label>
+      <input type="number" id="duration_days" min="1">
+
+      <!-- Days -->
+      <label>Days of Week</label>
+      <div class="days-of-week">
+        {% for d in ["sun","mon","tue","wed","thu","fri","sat"] %}
+          <button type="button" class="day" data-day="{{ d }}">{{ d[0]|upper }}</button>
+        {% endfor %}
+      </div>
+
+      <input type="hidden" id="days">
+
+      <!-- Actions -->
+      <div class="manual-save-wrapper">
+        <button class="manual-save-btn" onclick="saveSchedule()">💾 Save Changes</button>
+        <button class="manual-save-btn" onclick="cancelEdit()">❌ Cancel</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="/static/js/edit_schedule.js"></script>
+{% endblock %}

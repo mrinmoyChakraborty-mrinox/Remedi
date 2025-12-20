@@ -1,0 +1,432 @@
+/* ===============================
+   ADD MEDICINE PAGE
+   =============================== */
+
+.add-med-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.page-head {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.page-title--cobalt {
+  color: #0047ab;
+}
+
+/* ---------- Medicine Card ---------- */
+.medicine-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.medicine-card.collapsed .card-body {
+  display: none;
+}
+
+.medicine-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #f8f9fa;
+  cursor: pointer;
+}
+
+.medicine-card__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.medicine-card__actions {
+  display: flex;
+  gap: 10px;
+}
+
+.action-box {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.action-box:hover {
+  background: #f0f0f0;
+}
+
+/* ---------- Form ---------- */
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-body label {
+  display: block;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.card-body input[type="text"],
+.card-body input[type="number"],
+.card-body input[type="date"],
+.card-body input[type="time"],
+.card-body textarea,
+.card-body select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.card-body textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* ---------- Medium Options ---------- */
+.medium-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.medium-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0.5rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.medium-option:hover {
+  border-color: #4c8bfd;
+  background-color: #f0f7ff;
+}
+
+.medium-option input[type="radio"] {
+  display: none;
+}
+
+.medium-option input[type="radio"]:checked + .medium-color {
+  transform: scale(1.2);
+}
+
+.medium-option:has(input:checked) {
+  border-color: #4c8bfd;
+  background-color: #f0f7ff;
+  box-shadow: 0 2px 8px rgba(76, 139, 253, 0.3);
+}
+
+.medium-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+  transition: transform 0.2s;
+}
+
+.medium-icon {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+.medium-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #555;
+}
+
+/* ---------- Meal Options ---------- */
+.meal-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.meal-option {
+  position: relative;
+}
+
+.meal-input {
+  display: none;
+}
+
+.meal-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 100px;
+}
+
+.meal-card:hover {
+  border-color: #4c8bfd;
+  background-color: #f0f7ff;
+}
+
+.meal-input:checked + .meal-card {
+  border-color: #4c8bfd;
+  background-color: #f0f7ff;
+  box-shadow: 0 2px 8px rgba(76, 139, 253, 0.3);
+}
+
+.meal-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+.meal-label {
+  font-weight: 600;
+  text-align: center;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+/* ---------- Days of Week ---------- */
+.days-of-week {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.day {
+  flex: 1;
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.day:hover {
+  border-color: #4c8bfd;
+  background-color: #f0f7ff;
+}
+
+.day.selected {
+  border-color: #4c8bfd;
+  background-color: #4c8bfd;
+  color: white;
+}
+
+/* ---------- Divider ---------- */
+.divider {
+  margin: 2rem 0;
+  border: none;
+  border-top: 2px solid #e0e0e0;
+}
+
+.schedule-title {
+  color: #0047ab;
+  margin-bottom: 1rem;
+}
+
+/* ---------- Manual Save Button ---------- */
+.manual-save-wrapper {
+  margin: 1.5rem 0;
+  text-align: right;
+}
+
+.manual-save-btn {
+  padding: 0.6rem 1.5rem;
+  background: #4c8bfd;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.manual-save-btn:hover {
+  background: #3a7ae0;
+}
+
+/* ---------- Bottom Actions ---------- */
+.bottom-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.add-btn,
+.next-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.add-btn {
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  color: #333;
+}
+
+.add-btn:hover {
+  background: #e0e0e0;
+}
+
+.next-btn {
+  background: #28a745;
+  color: white;
+  border: none;
+}
+
+.next-btn:hover {
+  background: #218838;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .medium-group {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .meal-group {
+    grid-template-columns: 1fr;
+  }
+  
+  .days-of-week {
+    flex-wrap: wrap;
+  }
+  
+  .bottom-actions {
+    flex-direction: column;
+  }
+  
+  .add-btn,
+  .next-btn {
+    width: 100%;
+  }
+}
+/* Time of Day Grid - FIXED */
+.tod-pics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.tod-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.tod-item input[type="checkbox"] {
+  display: none;
+}
+
+.tod-item input[type="checkbox"]:checked ~ img {
+  border-color: #4c8bfd;
+}
+
+.tod-item:has(input:checked) {
+  border-color: #4c8bfd;
+  background-color: #f0f7ff;
+  box-shadow: 0 2px 8px rgba(76, 139, 253, 0.3);
+}
+
+.tod-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  margin-bottom: 0.5rem;
+  transition: border-color 0.2s;
+}
+
+.tod-label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.time-input-container {
+  display: none;
+  margin-top: 0.5rem;
+}
+
+.tod-item:has(input:checked) .time-input-container {
+  display: block;
+}
+
+.time-input-container input[type="time"] {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+/* Reminder Options */
+.reminder-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.reminder-checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.reminder-checkbox-group input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+}
+
+.reminder-checkbox-group label {
+  margin: 0;
+  font-weight: normal;
+  cursor: pointer;
+}

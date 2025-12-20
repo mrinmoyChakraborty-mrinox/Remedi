@@ -1,16 +1,12 @@
 {% extends "base.html" %}
 
-{% block styles %}
-    {{ super() }}
-    <link rel="stylesheet" href="{{ url_for('static', filename='confirmation_v2.css') }}">
-{% endblock %}
-
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/confirmation_v2.css') }}">
+
 <div class="conf-container">
     <nav class="breadcrumbs">
-        <a href="{{ url_for('home') }}">Home</a> /
+        <a href="/">Home</a> /
         <a href="#">Add Medicine</a> /
-        <a href="#">Schedule</a> /
         <span>Confirmation</span>
     </nav>
     <h1 class="page-title">Confirm Your Schedule</h1>
@@ -50,13 +46,15 @@
         </section>
     </main>
 </div>
-{% endblock %}
+<footer class="conf-footer">
+        <button id="back-btn" class="back-btn conf-btn">← Back to Schedule</button>
+        <div class="conf-footer-main-actions">
+            <button id="save-draft-btn" class="conf-btn conf-btn-draft">Save Draft</button>
+            <button id="activate-btn" class="conf-btn conf-btn-primary">Save & Activate</button>
+        </div>
+</footer>
 
-{% block scripts %}
-    {{ super() }}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
-    <script src="{{ url_for('static', filename='confirmation.js') }}"></script>
-    <style>
+<style>
 .conf-footer {
     display: flex;
     justify-content: space-between;
@@ -85,11 +83,8 @@
     border-color: white;
 }
 </style>
-<footer class="conf-footer">
-        <button id="back-btn" class="back-btn conf-btn">← Back to Schedule</button>
-        <div class="conf-footer-main-actions">
-            <button id="save-draft-btn" class="conf-btn conf-btn-draft">Save Draft</button>
-            <button id="activate-btn" class="conf-btn conf-btn-primary">Save & Activate</button>
-        </div>
-    </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+<script src="{{ url_for('static', filename='js/confirmation.js') }}"></script>
 {% endblock %}
+
