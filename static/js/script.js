@@ -1,117 +1,28 @@
-const btnSignIn = document.getElementById("btn-signin");
-const btnSignUp = document.getElementById("btn-signup");
-const signInForm = document.getElementById("signin-form");
-const signUpForm = document.getElementById("signup-form");
+// script.js
+// Purpose: UI switching only (Sign In / Sign Up tabs)
 
-btnSignIn.addEventListener("click", () => {
-  btnSignIn.classList.add("active");
-  btnSignUp.classList.remove("active");
-  signInForm.style.display = "flex";
-  signUpForm.style.display = "none";
+document.addEventListener("DOMContentLoaded", () => {
+  const signInBtn = document.getElementById("show-signin");
+  const signUpBtn = document.getElementById("show-signup");
+
+  const signInForm = document.getElementById("signin-form");
+  const signUpForm = document.getElementById("signup-form");
+
+  if (!signInBtn || !signUpBtn || !signInForm || !signUpForm) return;
+
+  signInBtn.addEventListener("click", () => {
+    signInForm.style.display = "block";
+    signUpForm.style.display = "none";
+
+    signInBtn.classList.add("active");
+    signUpBtn.classList.remove("active");
+  });
+
+  signUpBtn.addEventListener("click", () => {
+    signUpForm.style.display = "block";
+    signInForm.style.display = "none";
+
+    signUpBtn.classList.add("active");
+    signInBtn.classList.remove("active");
+  });
 });
-
-btnSignUp.addEventListener("click", () => {
-  btnSignUp.classList.add("active");
-  btnSignIn.classList.remove("active");
-  signUpForm.style.display = "flex";
-  signInForm.style.display = "none";
-});
-const signinForm = document.getElementById("signin-form");
-const signupForm = document.getElementById("signup-form");
-const phoneForm = document.getElementById("phone-form");
-
-const toggleBox = document.querySelector(".toggle");
-const googleBtn = document.getElementById("google-login-btn");
-const phoneBtn = document.getElementById("phone-login-btn");
-
-// Phone login click
-phoneBtn.addEventListener("click", () => {
-  // hide others
-  signinForm.style.display = "none";
-  signupForm.style.display = "none";
-  toggleBox.style.display = "none";
-  googleBtn.style.display = "none";
-  phoneBtn.style.display = "none";
-
-  // show phone form
-  phoneForm.style.display = "flex";
-});
-
-document.getElementById("back-btn").addEventListener("click", () => {
-  phoneForm.style.display = "none";
-
-  toggleBox.style.display = "flex";
-  googleBtn.style.display = "block";
-  phoneBtn.style.display = "block";
-  signinForm.style.display = "flex";
-});
-
-const phoneGoogleBtn = document.getElementById("phone-google-btn");
-const phoneEmailBtn = document.getElementById("phone-email-btn");
-
-// Google from phone page
-phoneGoogleBtn.addEventListener("click", () => {
-  phoneForm.style.display = "none";
-
-  toggleBox.style.display = "flex";
-  googleBtn.style.display = "block";
-  phoneBtn.style.display = "block";
-
-  signinForm.style.display = "flex";
-});
-
-// Email from phone page
-phoneEmailBtn.addEventListener("click", () => {
-  phoneForm.style.display = "none";
-
-  toggleBox.style.display = "flex";
-  googleBtn.style.display = "block";
-  phoneBtn.style.display = "block";
-
-  signinForm.style.display = "flex";
-});
-
-signinForm.addEventListener("submit", function (e) {
-  e.preventDefault(); // 🔥 MUST
-
-  const password = document.getElementById("signin-password").value.trim();
-
-  if (password.length < 8) {
-    alert("Password must be at least 8 characters ❌");
-    return;
-  }
-
-  alert("Sign In password valid ✅");
-});
-
-signupForm.addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const password = document.getElementById("signup-password").value.trim();
-
-  if (password.length < 8) {
-    alert("Password must be at least 8 characters ❌");
-    return;
-  }
-
-  alert("Sign Up password valid ✅");
-});
-
-// ================= VALIDATION FUNCTIONS =================
-
-function validateEmailValue(email) {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return regex.test(email);
-}
-
-function validatePasswordValue(password) {
-  const regex =
-    /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/;
-  return regex.test(password);
-}
-
-function validatePhoneValue(phone) {
-  const regex = /^(\+91)?[6-9]\d{9}$/;
-  return regex.test(phone);
-}
-
