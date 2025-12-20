@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
 
   const schedule_id = params.get("schedule_id");
+  const medicine_id = params.get("medicine_id"); // ✅ FIX: Extract medicine_id
   const medName = params.get("med_name");
   const remaining = params.get("remaining");
 
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        medicine_id: medicineId,
+        medicine_id: medicine_id, // ✅ FIX: Use the extracted medicine_id variable
         quantity: Number(qty)
       })
     });
@@ -31,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (res.ok) {
       alert("Medicine refilled successfully");
       window.close();
-
     } else {
       alert("Failed to refill");
     }
@@ -48,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (res.ok) {
       alert("Course marked as completed");
       window.close();
-
     } else {
       alert("Failed to update");
     }

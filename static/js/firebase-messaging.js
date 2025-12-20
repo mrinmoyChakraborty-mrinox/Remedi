@@ -12,32 +12,32 @@ async function initFirebaseMessaging() {
   messaging = getMessaging(app);
 
   // 🔔 FOREGROUND HANDLER
- onMessage(messaging, (payload) => {
-  console.log("🔔 MESSAGE:", payload);
+  onMessage(messaging, (payload) => {
+    console.log("🔔 MESSAGE:", payload);
 
-  notificationSound.currentTime = 0;
-  notificationSound.play().catch(() => {});
+    notificationSound.currentTime = 0;
+    notificationSound.play().catch(() => {});
 
-  const type = payload.data.notification_type || "reminder";
+    const type = payload.data.notification_type || "reminder";
 
-  if (type === "refill") {
-    showToast(
-      `🧾 Refill needed for ${payload.data.med_name}`,
-      payload.data,
-      "refill"
-    );
-  } else {
-    showToast(
-      `💊 Time to take ${payload.data.med_name}`,
-      payload.data,
-      "reminder"
-    );
-  }
-});
+    if (type === "refill") {
+      showToast(
+        `🧾 Refill needed for ${payload.data.med_name}`,
+        payload.data,
+        "refill"
+      );
+    } else {
+      showToast(
+        `💊 Time to take ${payload.data.med_name}`,
+        payload.data,
+        "reminder"
+      );
+    }
+  });
 }
 
-
 initFirebaseMessaging();
+
 function showToast(message, payload, type) {
   const container = document.getElementById("toast-container");
   if (!container) return;
@@ -65,14 +65,11 @@ function showToast(message, payload, type) {
       window.open(`/notification-action?${params.toString()}`);
     }
 
-    // ❌ DO NOT auto-remove other toasts
-    toast.remove(); // remove only the clicked one
+    toast.remove();
   };
 
   container.appendChild(toast);
 }
-
-
 
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("enableNotif");
@@ -84,9 +81,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   btn.addEventListener("click", async (e) => {
     e.preventDefault();
-     // If already enabled, do nothing
+    
+    // If already enabled, do nothing
     if (btn.classList.contains("enabled")) {
-        return;
+      return;
     }
 
     try {
@@ -130,8 +128,20 @@ document.addEventListener("DOMContentLoaded", () => {
       if (saveRes.ok) {
         console.log("✅ FCM Token saved:", token);
         localStorage.setItem("fcm_token", token);
+        
+        // ✅ FIX: Update the button state immediately without reload
+        btn.classList.add("enabled");
+        btn.disabled = true;
+        btn.title = "Notifications Enabled";
+        btn.style.opacity = "1";
+        
+        // Update SVG color
+        const svg = btn.querySelector("svg");
+        if (svg) {
+          svg.style.fill = "#42b983";
+        }
+        
         alert("✅ Notifications enabled successfully!");
-        window.location.reload();
       } else {
         throw new Error("Failed to save token");
       }
@@ -139,7 +149,10 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (error) {
       console.error("❌ Notification setup failed:", error);
       alert("Failed to enable notifications. Please try again.");
-      window.location.reload();
+      
+      // Reset button state on error
+      btn.disabled = false;
+      btn.style.opacity = "1";
     }
   });
 });
