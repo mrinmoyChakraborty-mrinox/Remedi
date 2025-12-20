@@ -130,7 +130,7 @@ def login():
     user = firebase_service.get_user(email)
     if not user:
         firebase_service.add_user(email=email, username=name)
-        user_data = {"email": email, "username": name, "photo_url": decoded.get("picture", "https://ik.imagekit.io/RemediRX/pngwing.com.png?updatedAt=1764494288724"),fcm_enabled: False}
+        user_data = {"email": email, "username": name, "photo_url": decoded.get("picture", "https://ik.imagekit.io/RemediRX/pngwing.com.png?updatedAt=1764494288724"),"fcm_enabled": False}
 
     session.permanent = True
     session["user"] = user_data
@@ -161,7 +161,7 @@ def google_login():
     if not user_data:
         photo=decoded.get("picture", "https://ik.imagekit.io/RemediRX/pngwing.com.png?updatedAt=1764494288724")
         firebase_service.add_user(email=email, username=name,photo_url=photo)
-        user_data = {"email": email, "username": name, "photo_url": photo,fcm_enabled: False}
+        user_data = {"email": email, "username": name, "photo_url": photo,"fcm_enabled": False}
 
     session.permanent = True
     session["user"] = user_data    
