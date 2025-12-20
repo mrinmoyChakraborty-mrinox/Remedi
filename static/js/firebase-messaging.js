@@ -120,11 +120,20 @@ document.addEventListener("DOMContentLoaded", () => {
       const app = initializeApp(firebaseConfig);
       const messagingInstance = getMessaging(app);
 
-      // Step 4: Register service worker
-      console.log("Registering service worker...");
+      // Step 4: Register service worker (or use existing one)
+      console.log("Setting up service worker...");
       if ("serviceWorker" in navigator) {
-        const registration = await navigator.serviceWorker.register("/firebase-messaging-sw.js");
-        console.log("Service worker registered:", registration);
+        // Check if SW is already registered
+        let registration = await navigator.serviceWorker.getRegistration("/firebase-messaging-sw.js");
+        
+        if (!registration) {
+          console.log("Registering new service worker...");
+          registration = await navigator.serviceWorker.register("/firebase-messaging-sw.js");
+        } else {
+          console.log("Service worker already registered, reusing it");
+        }
+        
+        console.log("Service worker registration:", registration);
         
         // Wait for service worker to be ready
         await navigator.serviceWorker.ready;
