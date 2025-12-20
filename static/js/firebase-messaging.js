@@ -5,35 +5,39 @@ let messaging = null;
 const notificationSound = new Audio("/static/sounds/notify.mp3");
 
 async function initFirebaseMessaging() {
-  const res = await fetch("/api/get_firebase_config");
-  const config = await res.json();
+  try {
+    const res = await fetch("/api/get_firebase_config");
+    const config = await res.json();
 
-  const app = initializeApp(config);
-  messaging = getMessaging(app);
+    const app = initializeApp(config);
+    messaging = getMessaging(app);
 
-  // 🔔 FOREGROUND HANDLER
-  onMessage(messaging, (payload) => {
-    console.log("🔔 MESSAGE:", payload);
+    // 🔔 FOREGROUND HANDLER
+    onMessage(messaging, (payload) => {
+      console.log("🔔 MESSAGE:", payload);
 
-    notificationSound.currentTime = 0;
-    notificationSound.play().catch(() => {});
+      notificationSound.currentTime = 0;
+      notificationSound.play().catch(() => {});
 
-    const type = payload.data.notification_type || "reminder";
+      const type = payload.data.notification_type || "reminder";
 
-    if (type === "refill") {
-      showToast(
-        `🧾 Refill needed for ${payload.data.med_name}`,
-        payload.data,
-        "refill"
-      );
-    } else {
-      showToast(
-        `💊 Time to take ${payload.data.med_name}`,
-        payload.data,
-        "reminder"
-      );
-    }
-  });
+      if (type === "refill") {
+        showToast(
+          `🧾 Refill needed for ${payload.data.med_name}`,
+          payload.data,
+          "refill"
+        );
+      } else {
+        showToast(
+          `💊 Time to take ${payload.data.med_name}`,
+          payload.data,
+          "reminder"
+        );
+      }
+    });
+  } catch (error) {
+    console.error("Failed to initialize Firebase Messaging:", error);
+  }
 }
 
 initFirebaseMessaging();
@@ -88,8 +92,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
+      // Step 1: Request permission
+      console.log("Requesting notification permission...");
       const permission = await Notification.requestPermission();
-      console.log("Permission:", permission);
+      console.log("Permission result:", permission);
 
       if (permission !== "granted") {
         alert("Notification permission denied. Please enable it in your browser settings.");
@@ -100,55 +106,81 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.disabled = true;
       btn.style.opacity = "0.6";
 
-      // Fetch Firebase config
+      // Step 2: Fetch Firebase config
+      console.log("Fetching Firebase config...");
       const res = await fetch("/api/get_firebase_config");
+      if (!res.ok) {
+        throw new Error("Failed to fetch Firebase config");
+      }
       const firebaseConfig = await res.json();
+      console.log("Firebase config loaded");
 
-      // Initialize Firebase
+      // Step 3: Initialize Firebase (if not already done)
+      console.log("Initializing Firebase...");
       const app = initializeApp(firebaseConfig);
-      const messaging = getMessaging(app);
+      const messagingInstance = getMessaging(app);
 
-      // Register service worker
+      // Step 4: Register service worker
+      console.log("Registering service worker...");
       if ("serviceWorker" in navigator) {
-        await navigator.serviceWorker.register("/static/firebase-messaging-sw.js");
+        const registration = await navigator.serviceWorker.register("/firebase-messaging-sw.js");
+        console.log("Service worker registered:", registration);
+        
+        // Wait for service worker to be ready
+        await navigator.serviceWorker.ready;
+        console.log("Service worker is ready");
       }
 
-      // Get FCM token
-      const token = await getToken(messaging, {
-        vapidKey: firebaseConfig.vapidKey
+      // Step 5: Get FCM token
+      console.log("Getting FCM token...");
+      const token = await getToken(messagingInstance, {
+        vapidKey: firebaseConfig.vapidKey,
+        serviceWorkerRegistration: await navigator.serviceWorker.ready
       });
+      
+      if (!token) {
+        throw new Error("Failed to get FCM token");
+      }
+      console.log("FCM token obtained:", token.substring(0, 20) + "...");
 
-      // Save token to backend
+      // Step 6: Save token to backend
+      console.log("Saving token to backend...");
       const saveRes = await fetch("/save-fcm-token", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token })
       });
 
-      if (saveRes.ok) {
-        console.log("✅ FCM Token saved:", token);
-        localStorage.setItem("fcm_token", token);
-        
-        // ✅ FIX: Update the button state immediately without reload
-        btn.classList.add("enabled");
-        btn.disabled = true;
-        btn.title = "Notifications Enabled";
-        btn.style.opacity = "1";
-        
-        // Update SVG color
-        const svg = btn.querySelector("svg");
-        if (svg) {
-          svg.style.fill = "#42b983";
-        }
-        
-        alert("✅ Notifications enabled successfully!");
-      } else {
-        throw new Error("Failed to save token");
+      if (!saveRes.ok) {
+        const errorText = await saveRes.text();
+        throw new Error(`Failed to save token: ${errorText}`);
       }
+
+      console.log("✅ Token saved successfully");
+      localStorage.setItem("fcm_token", token);
+      
+      // Update UI immediately
+      btn.classList.add("enabled");
+      btn.disabled = true;
+      btn.title = "Notifications Enabled";
+      btn.style.opacity = "1";
+      
+      const svg = btn.querySelector("svg");
+      if (svg) {
+        svg.style.fill = "#42b983";
+      }
+      
+      alert("✅ Notifications enabled successfully!");
 
     } catch (error) {
       console.error("❌ Notification setup failed:", error);
-      alert("Failed to enable notifications. Please try again.");
+      console.error("Error details:", {
+        name: error.name,
+        message: error.message,
+        stack: error.stack
+      });
+      
+      alert(`Failed to enable notifications: ${error.message}\n\nPlease check the console for details.`);
       
       // Reset button state on error
       btn.disabled = false;
