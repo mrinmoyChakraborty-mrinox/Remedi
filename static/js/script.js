@@ -1,28 +1,18 @@
-// script.js
-// Purpose: UI switching only (Sign In / Sign Up tabs)
+const btnSignIn = document.getElementById("btn-signin");
+const btnSignUp = document.getElementById("btn-signup");
+const signInForm = document.getElementById("signin-form");
+const signUpForm = document.getElementById("signup-form");
 
-document.addEventListener("DOMContentLoaded", () => {
-  const signInBtn = document.getElementById("show-signin");
-  const signUpBtn = document.getElementById("show-signup");
+btnSignIn.addEventListener("click", () => {
+  btnSignIn.classList.add("active");
+  btnSignUp.classList.remove("active");
+  signInForm.style.display = "flex";
+  signUpForm.style.display = "none";
+});
 
-  const signInForm = document.getElementById("signin-form");
-  const signUpForm = document.getElementById("signup-form");
-
-  if (!signInBtn || !signUpBtn || !signInForm || !signUpForm) return;
-
-  signInBtn.addEventListener("click", () => {
-    signInForm.style.display = "block";
-    signUpForm.style.display = "none";
-
-    signInBtn.classList.add("active");
-    signUpBtn.classList.remove("active");
-  });
-
-  signUpBtn.addEventListener("click", () => {
-    signUpForm.style.display = "block";
-    signInForm.style.display = "none";
-
-    signUpBtn.classList.add("active");
-    signInBtn.classList.remove("active");
-  });
+btnSignUp.addEventListener("click", () => {
+  btnSignUp.classList.add("active");
+  btnSignIn.classList.remove("active");
+  signUpForm.style.display = "flex";
+  signInForm.style.display = "none";
 });
