@@ -66,12 +66,12 @@ def upload_pil_image(pil_image, file_name):
         if isinstance(upload, dict):
             return {
                 "url": upload.get("url"),
-                "fileId": upload.get("fileId")
+                "fileId": upload.get("file_Id")
             }
         else:
             return {
                 "url": getattr(upload, "url", None),
-                "fileId": getattr(upload, "fileId", None)
+                "fileId": getattr(upload, "file_Id", None)
             }
 
     except Exception as e:
@@ -90,19 +90,17 @@ def upload_document(file, file_name):
             file=encoded_string,
             file_name=file_name
         )
-        print("🔴 RAW IMAGEKIT RESPONSE:", upload)
-        print("🔴 TYPE:", type(upload))
-
+        
         # Normalize response
         if isinstance(upload, dict):
             return {
                 "url": upload.get("url"),
-                "fileId": upload.get("fileId")
+                "fileId": upload.get("file_Id")
             }
         else:
             return {
                 "url": getattr(upload, "url", None),
-                "fileId": getattr(upload, "fileId", None)
+                "fileId": getattr(upload, "file_Id", None)
             }
 
     except Exception as e:
