@@ -86,7 +86,7 @@ def upload_document(file, file_name):
         file.seek(0)
         encoded_string = base64.b64encode(file.read()).decode('utf-8')
 
-        upload = imagekit.upload_file(
+        upload = imagekit.upload(
             file=encoded_string,
             file_name=file_name
         )
