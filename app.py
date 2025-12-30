@@ -624,7 +624,7 @@ def upload_prescription():
         return jsonify({"error": "Upload failed"}), 500
 
     user_id = session['user']['email']
-    firebase_service.upload_prescription(user_id,image_url)
+    firebase_service.upload_prescription(user_id,image_url.get("url"),image_url.get("fileId"))
     return jsonify({"success":True}), 200
 @app.route('/api/prescriptions/list',methods=['GET'])
 def list_prescriptions():

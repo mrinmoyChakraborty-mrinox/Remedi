@@ -1,6 +1,7 @@
 import firebase_admin
 from firebase_admin import credentials, firestore, auth, storage
 import os,json
+import upload
 from flask import jsonify
 from datetime import datetime, timedelta
 import pytz
@@ -277,10 +278,11 @@ def get_schedules(user_id):
         return []
 
 #ADD PRESCRIPTION TO PROFILE
-def upload_prescription(user_id,image_url):
+def upload_prescription(user_id,image_url,fileId):
     ref=db.collection('users').document(user_id).collection('prescriptions').document()
     ref.set({
         'image_url':image_url,
+        'fileId':fileId,
         'uploaded_at':firestore.SERVER_TIMESTAMP
     })
 def list_prescriptions(user_id):
@@ -299,7 +301,10 @@ def list_prescriptions(user_id):
 def delete_prescription(user_id, pres_id):
     try:
         prescription_ref=db.collection('users').document(user_id).collection('prescriptions').document(pres_id)
+        fileId=prescription_ref.get().to_dict().get('fileId')
+        upload.delete_imagekit_file(fileId)
         prescription_ref.delete()
+        
     except Exception as e:
         print(f"Error deleting prescriptions for user {user_id}: {e}")
 
