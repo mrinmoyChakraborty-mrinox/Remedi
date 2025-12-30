@@ -1,7 +1,7 @@
 import firebase_admin
 from firebase_admin import credentials, firestore, auth, storage
 import os,json
-import upload
+from services import upload
 from flask import jsonify
 from datetime import datetime, timedelta
 import pytz
