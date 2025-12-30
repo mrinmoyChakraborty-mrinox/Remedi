@@ -6,7 +6,8 @@
 
 # 🩺 ReMedi — Never miss a dose again.
 
-**ReMedi** is a Flask + Firebase-powered web app that helps users manage their medicines smartly — with timely reminders, refill alerts, and an optional hydration tracker to promote better daily health.
+**ReMedi** is a Flask + Firebase-powered web app that helps users manage their medicines smartly — with timely reminders, refill alerts, and prescription-based scheduling.
+.
 
 ---
 
@@ -16,7 +17,7 @@
 - 💊 **Medicine Reminder:** Add medicines with dosage, time, and duration.
 - 📦 **Refill Tracker:** Get alerts when medicine stock runs low.
 - 🧾 **Notes & Instructions:** Save doctor’s advice or medicine interactions.
-- 🧾 **Prescription Scanner** (OCR-based auto-fill for medicines)
+- 🧾 **Prescription Upload & OCR Scanner** (auto-fill medicines from prescriptions)
 - 🔔 **Daily Alerts:** Stay on track with timely notifications or on-screen reminders.
 - ☁️ Push Notifications using Firebase Cloud Messaging
 
@@ -81,12 +82,12 @@ Remedi/
 
 1. 🩺 **User registers** with email + password/Google via Firebase Auth.  
 2. 💊 **Medicines are added** with name, time, dosage, and optional notes.  
-3. 🔔 **Reminders are triggered** by Flask’s scheduler or local notifications.  
+3. 🔔 **Reminders** are triggered via scheduled cron jobs and client-side notifications.  
 4. 📦 **Refill alerts**show when medicine count is low.  
-6. 📄 **Prescription Upload**
+5. 📄 **Prescription Upload**
    Secure storage of medical prescriptions within the app.
 
-8. 🧠 **Smart Schedule Creation from Prescriptions**
+6. 🧠 **Smart Schedule Creation from Prescriptions**
    Create medicine schedules directly from uploaded prescriptions, minimizing manual effort.
 
 
