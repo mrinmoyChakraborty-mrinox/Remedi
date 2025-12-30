@@ -66,12 +66,12 @@ def upload_pil_image(pil_image, file_name):
         if isinstance(upload, dict):
             return {
                 "url": upload.get("url"),
-                "fileId": upload.get("file_Id")
+                "fileId": upload.get("file_id")
             }
         else:
             return {
                 "url": getattr(upload, "url", None),
-                "fileId": getattr(upload, "file_Id", None)
+                "fileId": getattr(upload, "file_id", None)
             }
 
     except Exception as e:
@@ -95,12 +95,12 @@ def upload_document(file, file_name):
         if isinstance(upload, dict):
             return {
                 "url": upload.get("url"),
-                "fileId": upload.get("file_Id")
+                "fileId": upload.get("file_id")
             }
         else:
             return {
                 "url": getattr(upload, "url", None),
-                "fileId": getattr(upload, "file_Id", None)
+                "fileId": getattr(upload, "file_id", None)
             }
 
     except Exception as e:
