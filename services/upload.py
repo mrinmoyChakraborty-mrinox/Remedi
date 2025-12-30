@@ -90,6 +90,8 @@ def upload_document(file, file_name):
             file=encoded_string,
             file_name=file_name
         )
+        print("🔴 RAW IMAGEKIT RESPONSE:", result)
+        print("🔴 TYPE:", type(result))
 
         # Normalize response
         if isinstance(upload, dict):
