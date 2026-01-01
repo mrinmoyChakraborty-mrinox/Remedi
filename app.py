@@ -87,7 +87,8 @@ def update_profile():
             # UPLOAD TO IMAGEKIT
             try:
                 image_url = upload.upload_document(profile_pic, filename)
-                updates["photo_url"] = image_url
+                updates["photo_url"] = image_url["url"]
+                updates["profile_pic_file_id"] = image_url["fileId"]
             except Exception as e:
                 print("ImageKit upload failed:", e)
                 flash("Profile picture could not be uploaded.")
