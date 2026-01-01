@@ -83,6 +83,13 @@ def update_profile():
 
         if profile_pic and profile_pic.filename:
             filename = secure_filename(profile_pic.filename)
+            # fetch existing user data
+            user_doc = firebase_service.get_user(email)
+
+            # 🗑️ DELETE OLD PROFILE PIC (if exists)
+            old_file_id = user_doc.get("profile_pic_file_id")
+            if old_file_id:
+                upload.delete_imagekit_file(old_file_id)
 
             # UPLOAD TO IMAGEKIT
             try:
