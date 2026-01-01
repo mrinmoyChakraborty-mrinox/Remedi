@@ -1,12 +1,13 @@
 <p align="center">
-  <img src="static/images/titleicon.png" alt="ReMedi Logo" width="120"/>
+  <img src="static/images/titleicon.png" alt="ReMedi Logo" width="200"/>
 </p>
 
 ---
 
 # 🩺 ReMedi — Never miss a dose again.
 
-**ReMedi** is a Flask + Firebase-powered web app that helps users manage their medicines smartly — with timely reminders, refill alerts, and an optional hydration tracker to promote better daily health.
+**ReMedi** is a Flask + Firebase-powered web app that helps users manage their medicines smartly — with timely reminders, refill alerts, and prescription-based scheduling.
+.
 
 ---
 
@@ -16,16 +17,17 @@
 - 💊 **Medicine Reminder:** Add medicines with dosage, time, and duration.
 - 📦 **Refill Tracker:** Get alerts when medicine stock runs low.
 - 🧾 **Notes & Instructions:** Save doctor’s advice or medicine interactions.
-- 📄 **Schedule Exporter:** Download your full medicine schedule as a clean PDF.
+- 🧾 **Prescription Upload & OCR Scanner** (auto-fill medicines from prescriptions)
 - 🔔 **Daily Alerts:** Stay on track with timely notifications or on-screen reminders.
+- ☁️ Push Notifications using Firebase Cloud Messaging
 
-### 💧 Optional Add-On
-- **Hydration Tracker:** Track daily water intake and stay hydrated (user can enable/disable this feature).
 
 ### 🧠 Future Enhancements
-- 🧾 Prescription Scanner (OCR-based auto-fill for medicines)
+- 📄 **Schedule Exporter:** Download your full medicine schedule as a clean PDF.
+- 📲 Phone Number based sign in/sign up
+- 🚫🌐Offline Support
 - 🤖 Smart Suggestions (AI-based health insights)
-- ☁️ Push Notifications using Firebase Cloud Messaging
+- 💧 **Hydration Tracker:** Track daily water intake and stay hydrated (user can enable/disable this feature).
 
 ---
 
@@ -38,9 +40,9 @@
 | **Database** | Firebase Firestore |
 | **Authentication** | Firebase Auth |
 | **Storage** | ImagekitIo (for prescription uploads) |
-| **Scheduler** | APScheduler |
-| **PDF Export** | FPDF / ReportLab |
-| **OCR (optional)** | Gemini 2.5 flash API |
+| **Scheduler** | cron with cron-job.org |
+| **PDF to image** | pymupdf |
+| **AI-OCR** | Gemini 2.5 flash API |
 
 ---
 
@@ -60,7 +62,7 @@ Remedi/
 │   ├── dashboard.html
 │   ├── add_medicine.html
 │   ├── getstarted.html
-│   └── hydration.html (optional)
+│   └── and many more templates
 │
 ├── static/                    # CSS, JS, and images
 │   ├── css/
@@ -69,9 +71,8 @@ Remedi/
 │
 └── services/
 ├── firebase_service.py    # Firestore CRUD helpers
-├── scheduler_service.py   # Reminder + notification handling
-└── pdf_exporter.py        # PDF generation logic
-└── ocr.py                 # api calls and ocr output
+|── upload.py    # handles all the uploads to Imagekit
+└── ocr_test.py                 # api calls and ocr output
 
 ````
 
@@ -79,12 +80,16 @@ Remedi/
 
 ## 🧠 How It Works
 
-1. 🩺 **User registers** with email + password via Firebase Auth.  
+1. 🩺 **User registers** with email + password/Google via Firebase Auth.  
 2. 💊 **Medicines are added** with name, time, dosage, and optional notes.  
-3. 🔔 **Reminders are triggered** by Flask’s scheduler or local notifications.  
-4. 📦 **Refill alerts** show when medicine count is low.  
-5. 🧾 **User can export** their medicine list as a printable PDF.
-6. 💧 *(Optional)* User can enable **hydration tracking** in settings.
+3. 🔔 **Reminders** are triggered via scheduled cron jobs and client-side notifications.  
+4. 📦 **Refill alerts**show when medicine count is low.  
+5. 📄 **Prescription Upload**
+   Secure storage of medical prescriptions within the app.
+
+6. 🧠 **Smart Schedule Creation from Prescriptions**
+   Create medicine schedules directly from uploaded prescriptions, minimizing manual effort.
+
 
 ---
 
@@ -132,11 +137,11 @@ Remedi/
 
 ## 🏆 Why ReMedi?
 
-* 🕐 Never miss a dose again
-* 📦 Get timely refill alerts
-* 💧 Stay hydrated (if you want to)
-* 🧾 Shareable printable schedules
-* ☁️ Cloud-based — your data is safe and accessible anywhere
+* ⏰ Never miss a dose with intelligent medicine reminders
+* 🔔 Receive timely refill alerts to avoid interruptions
+* 📄 Securely upload and manage medical prescriptions
+* 🧠 Generate medicine schedules directly from prescriptions
+* ☁️ Cloud-based access ensures data safety and availability
 
 ---
 
